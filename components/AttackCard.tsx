@@ -13,7 +13,7 @@ export default function AttackCard({
     <div className="mt-3">
       <Header>{title}</Header>
 
-      <table className="border-collapse w-full border border-slate-400 dark:border-slate-500 bg-white dark:bg-slate-800 text-sm shadow-sm">
+      <table className="table-fixed border-collapse w-full border border-slate-400 dark:border-slate-500 bg-white dark:bg-slate-800 text-sm shadow-sm">
         <thead className="bg-slate-50 dark:bg-slate-700">
           <tr>
             <RowHeader>Name</RowHeader>

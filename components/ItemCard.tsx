@@ -24,14 +24,14 @@ export default function ItemCard({ pokemon, search }: ItemCardInterface) {
         </div>
         <hr />
 
-        <div className="grid grid-cols-2 gap-4 m-3">
+        <div className="grid md:grid-cols-2 gap-4 m-3">
           <div className="gap-3 flex flex-col">
             <div className="w-100 flex justify-center">
               <Image
                 className="rounded-t-lg"
                 src={pokemon.image}
-                width={400}
-                height={400}
+                width={350}
+                height={350}
                 alt={pokemon.name}
               />
             </div>
