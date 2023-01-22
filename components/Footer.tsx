@@ -4,7 +4,7 @@ import tw from "tailwind-styled-components";
 export default function Footer() {
   return (
     <FooterDiv>
-      Craftsmanship by
+      Developed by
       <AuthorLink
         href="https://github.com/maythu98"
         target="_blank"
