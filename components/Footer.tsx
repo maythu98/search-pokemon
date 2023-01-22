@@ -17,7 +17,7 @@ export default function Footer() {
 }
 
 const FooterDiv = tw.div`
-    mt-6 text-slate-400	
+    mt-6 text-slate-400 text-center
 `;
 
 const AuthorLink = tw.a`

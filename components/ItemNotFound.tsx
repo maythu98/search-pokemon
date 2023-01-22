@@ -13,9 +13,7 @@ export default function ItemNotFound({ name }: NotFoundProps) {
       <ImageWrapper>
         <Image src={pic} alt="Not Found Image" width={500} height={500} />
       </ImageWrapper>
-      <Text>
-        There is no Pokemon : <b> {name}! </b>
-      </Text>
+      <Text>Not Found!</Text>
     </Container>
   );
 }
@@ -25,5 +23,5 @@ const ImageWrapper = tw.div`
 `;
 
 const Text = tw.h3`
-  text-2xl
+  text-2xl text-center mb-6
 `;
