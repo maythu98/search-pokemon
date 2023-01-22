@@ -14,6 +14,7 @@ export default function TagList({ title, items, bg }: TagListInterface) {
         {items.map((item) => (
           <div
             key={item}
+            data-testid={`${title.toLowerCase()}-${item}`}
             className={`py-2 px-3 ${bg} text-white text-sm font-semibold rounded-md shadow`}
           >
             {item}
