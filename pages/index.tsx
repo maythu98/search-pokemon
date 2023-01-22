@@ -29,8 +29,10 @@ export default function Home({ pokemon, keyword }: HomeParamInterface) {
     nameInput.setValue(keyword);
   }, [keyword]);
 
-  const search = (nameKeyword: any) => {
-    router.push({ pathname: "/", query: { name: nameKeyword } });
+  const search = (value: string) => {
+    console.log("This is Search", value);
+
+    router.push({ pathname: "/", query: { name: value } });
   };
 
   return (
@@ -47,7 +49,7 @@ export default function Home({ pokemon, keyword }: HomeParamInterface) {
       {loading && <span>Loading....</span>}
 
       {pokemon ? (
-        <ItemCard pokemon={pokemon} search={search} />
+        <ItemCard pokemon={pokemon} />
       ) : (
         <ItemNotFound name="May Thu" />
       )}

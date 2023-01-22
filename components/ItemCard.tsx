@@ -10,10 +10,9 @@ import Link from "next/link";
 
 interface ItemCardInterface {
   pokemon: Pokemon;
-  search: Function;
 }
 
-export default function ItemCard({ pokemon, search }: ItemCardInterface) {
+export default function ItemCard({ pokemon }: ItemCardInterface) {
   console.log(pokemon);
 
   return (
