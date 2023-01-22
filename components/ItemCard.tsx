@@ -7,89 +7,67 @@ import tw from "tailwind-styled-components";
 import AttackCard from "./AttackCard";
 import TagList from "./TagList";
 import Link from "next/link";
+import DetailBox from "./DetailBox";
+import ImageBox from "./ImageBox";
+import EvoReqItem from "./EvoReqItem";
 
 interface ItemCardInterface {
   pokemon: Pokemon;
 }
 
 export default function ItemCard({ pokemon }: ItemCardInterface) {
-  console.log(pokemon);
-
   return (
-    <div className="flex my-6">
-      <div className="rounded-lg shadow-lg bg-white w-full max-w py-5">
-        <div className="text-gray-900 text-3xl mb-3 font-medium mb-2 px-3">
-          {pokemon.name} #{pokemon.number}
-        </div>
-        <hr />
+    <MainCard>
+      <CardHeader>
+        {pokemon.name} #{pokemon.number}
+      </CardHeader>
+      <hr />
 
-        <div className="grid md:grid-cols-2 gap-4 m-3">
-          <div className="gap-3 flex flex-col">
-            <div className="w-100 flex justify-center">
-              <Image
-                className="rounded-t-lg"
-                src={pokemon.image}
-                width={350}
-                height={350}
-                alt={pokemon.name}
-              />
-            </div>
+      <GridMdCol>
+        <ImgCol>
+          <ImageBox image={pokemon.image} alt={pokemon.name} />
 
-            <div className="mt-10">
-              <h3 className="text-2xl my-2">Attacks</h3>
-              {pokemon.attacks.fast && (
-                <AttackCard attacks={pokemon.attacks.fast} title="Fast" />
-              )}
-              {pokemon.attacks.special && (
-                <AttackCard attacks={pokemon.attacks.special} title="Special" />
-              )}
-            </div>
-          </div>
-
-          <div className="flex flex-col justify-start text-start gap-6">
-            {pokemon.types && (
-              <TagList bg="bg-indigo-500" title="Type" items={pokemon.types} />
+          <div className="mt-10">
+            <SubHeader>Attacks</SubHeader>
+            {pokemon.attacks.fast && (
+              <AttackCard attacks={pokemon.attacks.fast} title="Fast" />
             )}
+            {pokemon.attacks.special && (
+              <AttackCard attacks={pokemon.attacks.special} title="Special" />
+            )}
+          </div>
+        </ImgCol>
 
-            <div className="rounded-lg shadow-lg bg-green-500 max-w py-3">
-              <Wrapper>
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <BoxTitle>Height</BoxTitle>
-                    <BoxBody>
-                      {pokemon.height.minimum} - {pokemon.height.maximum}
-                    </BoxBody>
-                  </div>
-                  <div>
-                    <BoxTitle>Weight</BoxTitle>
-                    <BoxBody>
-                      {pokemon.weight.minimum} - {pokemon.weight.maximum}
-                    </BoxBody>
-                  </div>
-                  <div>
-                    <BoxTitle>Classification</BoxTitle>
-                    <BoxBody>{pokemon.classification}</BoxBody>
-                  </div>
-                  <div>
-                    <BoxTitle>Flee Rate</BoxTitle>
-                    <BoxBody>{pokemon.fleeRate}</BoxBody>
-                  </div>
-                  <div>
-                    <BoxTitle>Max CP</BoxTitle>
-                    <BoxBody>{pokemon.maxCP}</BoxBody>
-                  </div>
-                  <div>
-                    <BoxTitle>Max HP</BoxTitle>
-                    <BoxBody>{pokemon.maxHP}</BoxBody>
-                  </div>
-                </div>
-              </Wrapper>
-            </div>
+        <InfoCol>
+          {pokemon.types && (
+            <TagList bg="bg-indigo-500" title="Type" items={pokemon.types} />
+          )}
 
+          <DetailCard>
+            <Wrapper>
+              <GridCol className="gap-4">
+                <DetailBox
+                  title="Height"
+                  desc={`${pokemon.height.minimum} - ${pokemon.height.maximum}`}
+                />
+                <DetailBox
+                  title="Weight"
+                  desc={`${pokemon.weight.minimum} - ${pokemon.weight.maximum}`}
+                />
+                <DetailBox
+                  title="Classification"
+                  desc={pokemon.classification}
+                />
+                <DetailBox title="Flee Rate" desc={pokemon.fleeRate} />
+                <DetailBox title="Max CP" desc={pokemon.maxCP} />
+                <DetailBox title="Max HP" desc={pokemon.maxHP} />
+              </GridCol>
+            </Wrapper>
+          </DetailCard>
+
+          {pokemon.evolutions && (
             <div>
-              {pokemon.evolutions && (
-                <h3 className="text-2xl my-2">Evolutions</h3>
-              )}
+              <SubHeader>Evolutions</SubHeader>
               {pokemon.evolutions &&
                 pokemon.evolutions.map((item) => (
                   <Link
@@ -104,54 +82,74 @@ export default function ItemCard({ pokemon }: ItemCardInterface) {
                   </Link>
                 ))}
             </div>
+          )}
 
-            {pokemon.evolutionRequirements && (
-              <div>
-                <h3 className="text-2xl my-2">Evolution Requirements</h3>
+          {pokemon.evolutionRequirements && (
+            <div>
+              <SubHeader>Evolution Requirements</SubHeader>
 
-                <div className="grid grid-cols-2">
-                  <div>
-                    <h1>Name</h1>
-                    <span className="font-medium">
-                      {pokemon.evolutionRequirements.name}
-                    </span>
-                  </div>
-                  <div>
-                    <h1>Amount</h1>
-                    <span className="font-medium">
-                      {pokemon.evolutionRequirements.amount}
-                    </span>
-                  </div>
-                </div>
-              </div>
-            )}
+              <GridCol>
+                <EvoReqItem
+                  title="Name"
+                  desc={pokemon.evolutionRequirements.name}
+                />
+                <EvoReqItem
+                  title="Amount"
+                  desc={pokemon.evolutionRequirements.amount}
+                />
+              </GridCol>
+            </div>
+          )}
 
-            {pokemon.resistant && (
-              <TagList
-                bg="bg-red-400"
-                title="Weakness"
-                items={pokemon.weaknesses}
-              />
-            )}
+          {pokemon.resistant && (
+            <TagList
+              bg="bg-red-400"
+              title="Weakness"
+              items={pokemon.weaknesses}
+            />
+          )}
 
-            {pokemon.resistant && (
-              <TagList
-                bg="bg-lime-400"
-                title="Resistant"
-                items={pokemon.resistant}
-              />
-            )}
-          </div>
-        </div>
-      </div>
-    </div>
+          {pokemon.resistant && (
+            <TagList
+              bg="bg-lime-400"
+              title="Resistant"
+              items={pokemon.resistant}
+            />
+          )}
+        </InfoCol>
+      </GridMdCol>
+    </MainCard>
   );
 }
 
-const BoxTitle = tw.h4`
-  text-white	
+const MainCard = tw.div`
+rounded-lg shadow-lg bg-white w-full max-w py-5 my-6 px-3
 `;
 
-const BoxBody = tw.p`
-  text-2xl
+const ImgCol = tw.div`
+gap-3 flex flex-col
+`;
+
+const InfoCol = tw.div`
+flex flex-col justify-start text-start gap-6
+`;
+
+const DetailCard = tw.div`
+rounded-lg shadow-lg bg-green-500 max-w py-3"
+`;
+
+const CardHeader = tw.div`
+text-gray-900 text-3xl mb-3 font-medium mb-2 px-3
+`;
+
+const GridMdCol = tw.div`
+grid md:grid-cols-2 gap-4 m-3
+`;
+
+const GridCol = tw.div`
+grid grid-cols-2
+`;
+
+const SubHeader = tw.h3`
+text-2xl my-2
 `;
