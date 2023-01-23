@@ -13,6 +13,7 @@ import ItemCard from "@/components/ItemCard";
 import { useEffect, useState } from "react";
 import SearchBox from "@/components/SearchBox";
 import Wrapper from "@/components/Ui/Wrapper";
+import SampleItems from "@/components/SampleItems";
 
 interface HomeParamInterface {
   pokemon: Pokemon | null | undefined;
@@ -45,13 +46,16 @@ export default function Home({ pokemon, keyword }: HomeParamInterface) {
         changeNameInput={nameInput.onChange}
         search={search}
       />
-
       {loading && <span>Loading....</span>}
 
-      {pokemon ? (
-        <ItemCard pokemon={pokemon} />
+      {keyword ? (
+        pokemon ? (
+          <ItemCard pokemon={pokemon} />
+        ) : (
+          <ItemNotFound name="May Thu" />
+        )
       ) : (
-        <ItemNotFound name="May Thu" />
+        <SampleItems />
       )}
 
       <Footer />
